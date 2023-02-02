@@ -27,31 +27,43 @@
       <h1 class="display-4">New York Times Search</h1>
     </div>
 
-    <form>
+    <form class="search-form">
       <div class="card">
         <div class="card-header">
           Search Parameters
         </div>
+      </div>
       <div class="mb-3">
         <label for="search-input" class="form-label">Search term</label>
-        <input type="text" class="form-control" id="search-input" aria-describedby="emailHelp">
+        <input type="text" class="form-control user-input" id="search-input">
       </div>
       <div class="mb-3">
-        <label for="search-input" class="form-label">Number of records to retrieve</label>
-        <input type="number" class="form-control" id="search-input" aria-describedby="emailHelp">
+        <label for="records-number" class="form-label">Number of records to retrieve</label>
+        <input type="number" class="form-control" id="records-number">
       </div>
       <div class="mb-3">
-        <label for="search-input" class="form-label">Start year (optional)</label>
-        <input type="date" class="form-control" id="search-input" aria-describedby="emailHelp">
+        <label for="start-year" class="form-label">Start year (optional)</label>
+        <input type="text" class="form-control" id="start-year">
       </div>
       <div class="mb-3">
-        <label for="search-input" class="form-label">End year (optional)</label>
-        <input type="date" class="form-control" id="search-input" aria-describedby="emailHelp">
+        <label for="end-year" class="form-label">End year (optional)</label>
+        <input type="text" class="form-control" id="end-year">
       </div>
-      <button type="submit" class="btn btn-primary">Search</button>
+      <div class="row">
+      <button class="col searchBtn" type="submit" class="btn btn-primary">Search</button>
+      <button class="col deleteBtn" type="submit" class="btn btn-primary">Delete</button>
+    </div>
     </form>
-      <button type="submit" class="btn btn-primary">Delete</button>
-    </form>
+
+    <div class="card">
+      <div class="card-header">
+        Top Articles
+      </div>
+      <div class="card-body" id="card-body">
+        <h5 class="card-title" id="card-title"></h5>
+        <p class="card-text" id="card-text"></p>
+      </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
