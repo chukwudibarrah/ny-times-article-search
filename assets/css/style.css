@@ -1,0 +1,80 @@
+#top-header {
+    display: flex;
+    justify-content: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: midnightblue;
+}
+
+#main-title {
+    font-weight: 700;
+    color: white;
+}
+
+#search-form {
+    margin: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+#card-header {
+    display: flex;
+    font-weight: 700;
+}
+
+#form-section {
+    margin: 25px;
+}
+
+#ui-datepicker-div {
+    margin: 25px;
+}
+
+#button-section {
+    margin: 25px;
+}
+
+#news-display {
+    margin: 20px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.newsTitle {
+    font-size: 25px;
+    margin-top: 30px;
+}
+
+.abstract {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.published {
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0;
+}
+
+.link {
+    margin-bottom: 40px;
+    font-size: 15;
+}
+
+.searchBtn {
+    margin: 0;
+    border: 0;
+    background: 0;
+    padding: 0;
+}
+
+.deleteBtn {
+    margin: 0;
+    border: 0;
+    background: 0;
+    padding: 0;
+}
+
+.col-3 {
+    max-width: 10%;
+}

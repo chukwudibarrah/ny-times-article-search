@@ -24,47 +24,65 @@
 </head>
 
 <body>
-  <div class="jumbotron">
-    <h1 class="display-4">New York Times Search</h1>
+  <div class="jumbotron" id="top-header">
+    <h1 class="display-4" id="main-title"><i class="fa-regular fa-newspaper"></i> New York Times Search</h1>
   </div>
 
-  <form class="search-form">
+  <form class="search-form" id="search-form">
     <div class="card">
-      <div class="card-header">
-        Search Parameters
+      <div class="card-header" id="card-header">
+        <h5><i class="fa-regular fa-newspaper"></i> Search Parameters</h5>
       </div>
     </div>
-    <div class="mb-3">
-      <label for="search-input" class="form-label">Search term</label>
+    <div class="mb-3" id="form-section">
+      <label for="search-input" class="form-label">Search term:</label>
       <input type="text" class="form-control user-input" id="search-input">
     </div>
-    <div class="mb-3">
-      <label for="records-number" class="form-label">Number of records to retrieve</label>
+    <div class="mb-3" id="form-section">
+      <label for="records-number" class="form-label">Number of records to retrieve:</label>
       <input type="number" class="form-control" id="records-number">
     </div>
     <div id="ui-datepicker-div" class="mb-3">
-      <label for="from" class="form-label">Start year (optional)</label>
-      <input type="text" class="form-control hasDatepicker" name="from" id="from">
+      <label for="from" class="form-label">Start year (optional):</label>
+      <input type="date" placeholder="" class="form-control hasDatepicker" name="from" id="from">
     </div>
     <div id="ui-datepicker-div" class="mb-3">
-      <label for="to" class="form-label">End year (optional)</label>
-      <input type="text" class="form-control hasDatepicker" name="to" id="to">
+      <label for="to" class="form-label">End year (optional):</label>
+      <input type="date" class="form-control hasDatepicker" name="to" id="to">
     </div>
-    <div class="row">
-      <button class="col searchBtn" type="submit" class="btn btn-primary">Search</button>
-      <button class="col deleteBtn" type="submit" class="btn btn-primary">Delete</button>
+    <div class="row" id="button-section">
+      <button class="col-3 searchBtn" type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+      <button class="col-3 deleteBtn" type="submit" class="btn btn-primary"><i class="fa-solid fa-trash-can"></i> Clear results</button>
     </div>
   </form>
 
-  <div class="card">
-    <div class="card-header">
-      Top Articles
+  <div class="card" id="news-display">
+    <div class="card-header" id="card-header">
+      <h5><i class="fa-regular fa-newspaper"></i> Top Articles</h5>
     </div>
     <div class="card-body" id="card-body">
       <!-- <h5 class="card-title" id="card-title"></h5><br>
         <p class="card-text" id="card-text"></p> -->
     </div>
   </div>
+
+<!-- Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="alertModalLabel">Wait a minute!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Search term or number of records cannot be blank.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>

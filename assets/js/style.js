@@ -1,115 +1,144 @@
-$( function() {
-    var dateFormat = "mm/dd/yy",
-      from = $( "#from" )
-        .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true,
-          numberOfMonths: 3
-        })
-        .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
-        }),
-      to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 3
-      })
-      .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
-      });
- 
-    function getDate( element ) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-      } catch( error ) {
-        date = null;
-      }
- 
-      return date;
-    }
-  } );
-
-
-// var searchInput = $('.user-input').val().trim();
-//     var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchInput + "&api-key=IfMcgXr3RfvsvakXz3vGIDxGP3FV9MVj";
-
-// function displayNews() {
-//     var searchInput = $('.user-input').val().trim();
-//     var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchInput + "&api-key=IfMcgXr3RfvsvakXz3vGIDxGP3FV9MVj";
-// }
-
-// function clearInput() {
-//     var userInput = $('.user-input');
-//     userInput = "";
-// }
-
-
-
-$('.searchBtn').on('click', function(event) {
+$(document).ready(function () {
+  $(".searchBtn").on("click", function (event) {
     event.preventDefault();
 
-    // var searchInput = $('.user-input').val().trim();
-    // console.log('searchinput: ' + searchInput);
+    var dateStart = $("#from").val().trim();
+    var dateEnd = $("#to").val().trim();
 
-    var searchInput = $('.user-input').val().trim();
-    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchInput + "&api-key=IfMcgXr3RfvsvakXz3vGIDxGP3FV9MVj";
+    console.log("this is the date start: ", dateStart);
+    console.log("this is the date end: ", dateEnd);
+
+    var startDate = moment(dateStart).format("YYYYMMDD");
+    var endDate = moment(dateEnd).format("YYYYMMDD");
+
+    if (dateStart === "" || dateEnd === "") {
+      noDate();
+    } else if (dateStart !== "" || dateEnd !== "") {
+      withDate();
+    }
+  });
+
+  function noDate() {
+    var searchInput = $(".user-input").val().trim();
+    var recordsNo = $("#records-number").val().trim();
+
+    if (searchInput === "" || recordsNo === "") {
+      $(".modal").modal("show");
+      return;
+    }
+
+    var queryURL =
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+      searchInput +
+      "&api-key=GHY8uw0sGJ4z9D1MzxegFasENQRvcsnt";
 
     $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response) {
-        console.log('headline: ' + response.response.docs[0].headline.main);
-        // $('#card-text').text(JSON.stringify(response));
+      url: queryURL,
+      method: "GET",
+    }).then(function (response) {
+      var theNews = [];
+      theNews = response.response.docs;
 
-        var theNews = [];
-        theNews = response.response.docs;
-        // console.log('this is theNews: ' + JSON.stringify(theNews));
+      for (i = 0; i < recordsNo; i++) {
+        var theMain = theNews[i].headline.main;
+        var theAbstract = theNews[i].abstract;
+        var pubDate = moment(theNews[i].pub_date).format("DD MMM YYYY");
+        var webLink = theNews[i].web_url;
+        var source = theNews[i].source;
 
-        var recordsNo = $('#records-number').val().trim();
-        // console.log('Number of articles: ' + recordsNo);
+        //   console.log("pub date:", pubDate);
+        //   console.log("the source:", source);
+        //   console.log("the weblink:", webLink);
 
-        for (i = 0; i < recordsNo; i++) {
-            var theMain = theNews[i].headline.main;
-            var theAbstract = theNews[i].abstract;
-            // var theImage = theNews[i].multimedia.url;
+        h5 = $("<h5>");
+        h5.addClass("newsTitle");
+        h5.text(theMain);
 
-            // console.log(theMain);
-            // console.log(theAbstract);
+        abstract = $("<p>");
+        published = $("<p>");
+        link = $("<a>");
 
-            h5 = $('<h5>');
-            h5.attr("class=newsTitle");
-            h5.text(theMain);
+        abstract.addClass("newsText abstract");
+        published.addClass("newsText published");
+        link.addClass("newsText link");
+        link.attr("href", webLink);
 
-            p = $('<p>');
-            p.attr("class=newsAbstract");
-            p.text(theAbstract);
+        abstract.text(theAbstract);
+        published.text(pubDate);
+        link.text("Read more");
 
-            // newsImage = $('<img>');
-            // newsImage.attr('src', theNews[i].multimedia[3].url);
+        $("#card-body").append(h5);
+        $("#card-body").append(abstract);
+        $("#card-body").append(published);
+        $("#card-body").append(link);
+      }
+    });
 
-            $('#card-body').append(h5);
-            $('#card-body').append(p);
-            // $('#card-body').append(newsImage);
+    $("#card-body").empty();
+  }
 
-            if (searchInput === "" && recordsNo === "") {
-                alert('Search term and number of records cannot be blank.')
-                return;
-            }
+  function withDate() {
+    var searchInput = $(".user-input").val().trim();
+    var recordsNo = $("#records-number").val().trim();
 
-            
-        }
+    if (searchInput === "" || recordsNo === "") {
+      $(".modal").modal("show");
+      return;
+    }
 
-    })
+    var dateStart = $("#from").val().trim();
+    var dateEnd = $("#to").val().trim();
 
-    $('#card-body').empty();
-    // preventBlank();
-   
-})
+    var startDate = moment(dateStart).format("YYYYMMDD");
+    var endDate = moment(dateEnd).format("YYYYMMDD");
 
-// function preventBlank() {
-//     if (searchInput === '' || recordsNo === '') {
-//         alert('Search term and number of records cannot be blank.')
-//         return;
-//     }
-// }
+    var queryURL =
+      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+      searchInput +
+      "&facet_fields=source&facet=true&begin_date=" +
+      startDate +
+      "&end_date=" +
+      endDate +
+      "&api-key=GHY8uw0sGJ4z9D1MzxegFasENQRvcsnt";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).then(function (response) {
+      var theNews = [];
+      theNews = response.response.docs;
+
+      for (i = 0; i < recordsNo; i++) {
+        var theMain = theNews[i].headline.main;
+        var theAbstract = theNews[i].abstract;
+        var pubDate = moment(theNews[i].pub_date).format("DD MMM YYYY");
+        var webLink = theNews[i].web_url;
+        var source = theNews[i].source;
+
+        h5 = $("<h5>");
+        h5.addClass("newsTitle");
+        h5.text(theMain);
+
+        abstract = $("<p>");
+        published = $("<p>");
+        link = $("<a>");
+
+        abstract.addClass("newsText abstract");
+        published.addClass("newsText published");
+        link.addClass("newsText link");
+        link.attr("href", webLink);
+
+        abstract.text(theAbstract);
+        published.text(pubDate);
+        link.text("Read more");
+
+        $("#card-body").append(h5);
+        $("#card-body").append(abstract);
+        $("#card-body").append(published);
+        $("#card-body").append(link);
+      }
+    });
+
+    $("#card-body").empty();
+  }
+});
