@@ -1,21 +1,10 @@
-# New York Times Article Search - Phase 01
+# New York Times Article Search
 
-## Front-End Team
-![nyt-search](images/nyt.png)
+## Description
 
-* Create the layout for the design above using Bootstrap or to do something more customized of your own.
+* Use the New York Times API to create a simple news search page that displays results based on a search keyword and/or start and end dates
 
-* Make sure to organize your code so as to have the necessary IDs.
-
-* Incorporate text boxes for capturing user input. Then research how to retrieve the input values in JavaScript.
-
-## Back-End Team
-
-* Do preliminary research on the [API](https://developer.nytimes.com/docs/articlesearch-product/1/overview).
-
-* Register for an API key if you have not already done so.
-
-* Understand what format the URL should look like to make an article call. (**Hint:** Use the [API console!](https://developer.nytimes.com/docs/articlesearch-product/1/routes/articlesearch.json/get))
+* Here [a link](https://chukwudibarrah.github.io/ny-times-article-search/) to the finished page
 
 ---
 
